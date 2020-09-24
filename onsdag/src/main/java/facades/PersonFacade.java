@@ -8,6 +8,7 @@ package facades;
 import dto.PersonDTO;
 import dto.PersonsDTO;
 import entities.Person;
+import exceptions.MissingInputException;
 import exceptions.PersonNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -55,9 +56,12 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public PersonDTO addPerson(String fName, String lName, String phone) {
+    public PersonDTO addPerson(String fName, String lName, String phone) throws MissingInputException {
         EntityManager em = emf.createEntityManager();
         Person person = new Person(fName, lName, phone);
+        if ((fName.length() == 0 || lName.length() == 0 || phone.length() == 0)) {
+            throw new MissingInputException("Missing input");
+        }
         try {
             em.getTransaction().begin();
             em.persist(person);
@@ -66,38 +70,41 @@ public class PersonFacade implements IPersonFacade {
             em.close();
         }
         return new PersonDTO(person);
+
     }
 
     @Override
     public PersonDTO deletePerson(long id) throws PersonNotFoundException {
-         EntityManager em = getEntityManager();
-         Person person = em.find(Person.class, id);
+        EntityManager em = getEntityManager();
+        Person person = em.find(Person.class, id);
         if (person == null) {
-            throw new PersonNotFoundException ("Could not delete, Id don't exist");
+            throw new PersonNotFoundException("Could not delete, Id don't exist");
         } else {
-         try {
-             em.getTransaction().begin();
-             em.remove(person);
-             em.getTransaction().commit();
-         } finally {
-             em.close();
-         }
-         return new PersonDTO(person);
-    }}
+            try {
+                em.getTransaction().begin();
+                em.remove(person);
+                em.getTransaction().commit();
+            } finally {
+                em.close();
+            }
+            return new PersonDTO(person);
+        }
+    }
 
     @Override
     public PersonDTO getPerson(long id) throws PersonNotFoundException {
         EntityManager em = getEntityManager();
         Person person = em.find(Person.class, id);
         if (person == null) {
-            throw new PersonNotFoundException ("No person with provided id found");
+            throw new PersonNotFoundException("No person with provided id found");
         } else {
-        try {
-            return  new PersonDTO(person);
-        } finally {
-            em.close();
+            try {
+                return new PersonDTO(person);
+            } finally {
+                em.close();
+            }
         }
-    }}
+    }
 
     @Override
     public PersonsDTO getAllPersons() {
@@ -110,8 +117,11 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public PersonDTO editPerson(PersonDTO p) {
+    public PersonDTO editPerson(PersonDTO p) throws MissingInputException {
         EntityManager em = getEntityManager();
+        if ((p.getFirstName().length() == 0 || p.getLastName().length() == 0 || p.getPhone().length() == 0)) {
+            throw new MissingInputException("Missing input");
+        }
         try {
             em.getTransaction().begin();
             Person person = em.find(Person.class, p.getId());
@@ -124,7 +134,5 @@ public class PersonFacade implements IPersonFacade {
             em.close();
         }
     }
-
-   
 
 }

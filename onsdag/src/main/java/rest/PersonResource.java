@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.PersonDTO;
+import exceptions.MissingInputException;
 import exceptions.PersonNotFoundException;
 import utils.EMF_Creator;
 import facades.PersonFacade;
@@ -69,7 +70,7 @@ public class PersonResource {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public String addPerson(String person) {
+    public String addPerson(String person) throws MissingInputException {
         PersonDTO p = GSON.fromJson(person, PersonDTO.class);
         PersonDTO personAdded = FACADE.addPerson(p.getFirstName(), p.getLastName(), p.getPhone());
         return GSON.toJson(personAdded);
@@ -79,7 +80,7 @@ public class PersonResource {
     @Path("update/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public String updatePerson(@PathParam("id") long id, String person) throws PersonNotFoundException {
+    public String updatePerson(@PathParam("id") long id, String person) throws PersonNotFoundException, MissingInputException {
         PersonDTO personDTO = GSON.fromJson(person, PersonDTO.class);
         personDTO.setId(id);
         PersonDTO personNew = FACADE.editPerson(personDTO);
