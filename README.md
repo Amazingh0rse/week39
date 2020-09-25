@@ -9,7 +9,7 @@ cph-mr462
 - Github: https://github.com/Amazingh0rse/week39
 
 
-**Tirsdags opgaver**
+**Tirsdags opgaver**\
 📺 JPA intro\
 📺 JPA Project Setup\
 📺 JPA OneToOne relations\
