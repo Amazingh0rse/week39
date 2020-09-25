@@ -6,10 +6,17 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -22,12 +29,15 @@ public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long a_id;
+    @Column(name = "A_ID")
+    private Long id;
     private String street;
     private String zip;
     private String city;
 
-    @OneToOne(mappedBy = "address")
+    //@OneToOne(mappedBy = "address")
+    @OneToMany (fetch=FetchType.LAZY, mappedBy = "address", cascade = CascadeType.PERSIST)
+    private List<Person> persons;
     private Person person;
     
     
@@ -44,11 +54,11 @@ public class Address implements Serializable {
 
     
     public Long getId() {
-        return a_id;
+        return id;
     }
 
     public void setId(Long id) {
-        this.a_id = id;
+        this.id = id;
     }
 
     public String getStreet() {
@@ -75,8 +85,16 @@ public class Address implements Serializable {
         this.city = city;
     }
 
-    public Person getPerson() {
-        return person;
+//    public Person getPerson() {
+//        return person;
+//    }
+//
+//    public void setPerson(Person person) {
+//        this.person = person;
+//    }
+
+    public List<Person> getPersons() {
+        return persons;
     }
 
     public void setPerson(Person person) {
@@ -84,9 +102,11 @@ public class Address implements Serializable {
     }
     
     
+    public void addPerson (Person person){
+        this.persons.add(person);
+        if (person != null) {
+            person.setAddress(this);
+        }
+    }
 
-   
-
-    
-    
 }

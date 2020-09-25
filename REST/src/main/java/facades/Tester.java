@@ -28,7 +28,7 @@ public class Tester {
         Address a3 = new Address("Silent hill", "666", "Scary place");
 
         p1.setAddress(a1);
-        p2.setAddress(a2);
+        p2.setAddress(a1);
         p3.setAddress(a3);
 
         try {
