@@ -38,7 +38,7 @@ public class Address implements Serializable {
    
     @OneToOne (fetch=FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
     private Person person;
-    @OneToMany (fetch=FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany (fetch=FetchType.LAZY, mappedBy = "address", cascade = CascadeType.PERSIST)
     private List<Person> persons;
    
     

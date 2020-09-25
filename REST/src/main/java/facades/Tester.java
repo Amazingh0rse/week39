@@ -41,6 +41,7 @@ public class Tester {
             
             em.getTransaction().begin();
             em.remove(p1);
+            em.remove(p2);
             em.getTransaction().commit();
         } finally {
             em.close();
