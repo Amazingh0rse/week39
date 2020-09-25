@@ -19,10 +19,10 @@ cph-mr462
 - https://github.com/Amazingh0rse/week39/tree/master/JPA
 
 
-**REST, Error Handling, Rest Assured Part 1-2 of 4**
+**REST, Error Handling, Rest Assured Part 1-2 of 4**\
 - https://github.com/Amazingh0rse/week39/tree/master/REST
 
-**REST, Error Handling, Rest Assured Part 3 of 4**
+**REST, Error Handling, Rest Assured Part 3 of 4**\
 -https://github.com/Amazingh0rse/week39/tree/rest-part3/REST
 
 
