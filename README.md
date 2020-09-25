@@ -10,11 +10,11 @@ cph-mr462
 
 
 **Tirsdags opgaver**
-📺 JPA intro/
-📺 JPA Project Setup/
-📺 JPA OneToOne relations/
-📺 JPA OneToMany relations /
-📺 JPA ManyToMany relations/
+📺 JPA intro\
+📺 JPA Project Setup\
+📺 JPA OneToOne relations\
+📺 JPA OneToMany relations \
+📺 JPA ManyToMany relations
 
 - https://github.com/Amazingh0rse/week39/tree/master/JPA
 
