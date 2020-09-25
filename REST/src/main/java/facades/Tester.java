@@ -38,6 +38,10 @@ public class Tester {
             em.persist(p2);
             em.persist(p3);
             em.getTransaction().commit();
+            
+            em.getTransaction().begin();
+            em.remove(p1);
+            em.getTransaction().commit();
         } finally {
             em.close();
         }

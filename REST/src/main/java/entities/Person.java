@@ -39,7 +39,7 @@ public class Person implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastEdited;    
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
     
     

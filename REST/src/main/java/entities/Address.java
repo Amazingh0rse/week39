@@ -35,11 +35,12 @@ public class Address implements Serializable {
     private String zip;
     private String city;
 
-    //@OneToOne(mappedBy = "address")
-    @OneToMany (fetch=FetchType.LAZY, mappedBy = "address", cascade = CascadeType.PERSIST)
-    private List<Person> persons;
+   
+    @OneToOne (fetch=FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
     private Person person;
-    
+    @OneToMany (fetch=FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
+    private List<Person> persons;
+   
     
     
     
@@ -85,28 +86,23 @@ public class Address implements Serializable {
         this.city = city;
     }
 
-//    public Person getPerson() {
-//        return person;
-//    }
-//
-//    public void setPerson(Person person) {
-//        this.person = person;
-//    }
 
-    public List<Person> getPersons() {
-        return persons;
+    public Person getPerson() {
+        return person;
     }
 
     public void setPerson(Person person) {
         this.person = person;
     }
-    
-    
-    public void addPerson (Person person){
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void addPerson(Person person) {
         this.persons.add(person);
         if (person != null) {
             person.setAddress(this);
         }
     }
-
 }
